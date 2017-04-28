@@ -35,9 +35,13 @@ def numpy_dot():
 
     print(scores)
 
-    olympic_points_df = None
+    data = {
+        'country_name': Series(countries),
+        'points' : Series(scores)
+    }
+    olympic_points_df = DataFrame(data)
     return olympic_points_df
 
 
 if __name__ == '__main__':
-    numpy_dot()
+    print(numpy_dot())
