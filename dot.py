@@ -29,6 +29,15 @@ def numpy_dot():
     silver = [11, 5, 10, 7, 7, 6, 3, 0, 8, 4, 1, 4, 3, 7, 4, 2, 4, 3, 1, 0, 0, 2, 2, 2, 1, 0]
     bronze = [9, 10, 5, 12, 9, 5, 2, 1, 5, 7, 1, 2, 2, 6, 2, 4, 3, 1, 2, 1, 0, 6, 2, 1, 0, 1]
 
-    # YOUR CODE HERE
+    medal_matrix = [gold, silver, bronze]
+    scoring = [4, 2, 1]
+    scores = numpy.dot(scoring, medal_matrix)
 
+    print(scores)
+
+    olympic_points_df = None
     return olympic_points_df
+
+
+if __name__ == '__main__':
+    numpy_dot()
