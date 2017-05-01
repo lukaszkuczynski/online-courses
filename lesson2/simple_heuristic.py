@@ -65,7 +65,7 @@ def simple_heuristic(file_path):
         # Your code here:
         # For example, let's assume that if the passenger
         # is a male, then the passenger survived.
-        if passenger['Sex'] == 'male':
+        if passenger['Sex'] == 'female':
             predictions[passenger_id] = 1
         else:
             predictions[passenger_id] = 0
@@ -75,4 +75,7 @@ def simple_heuristic(file_path):
 if __name__ == '__main__':
     path = "c:\\Users\\lukasz\\Documents\\udacity\\titanic_data.csv"
     predictions = simple_heuristic(path)
+
     print(predictions)
+    survived = list(n for n in predictions.items() if n[1] == 1)
+    print(f'Survived {len(survived)} from total {len(predictions)}')
