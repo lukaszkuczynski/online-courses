@@ -64,8 +64,12 @@ def simple_heuristic(file_path):
 
         def is_woman(passenger):
             return passenger['Sex'] == 'female'
+        def is_young(passenger):
+            return passenger['Age'] < 18
+        def is_rich_and_bold(passenger):
+            return passenger['Pclass'] == 1
 
-        if is_woman(passenger):
+        if is_woman(passenger) or (is_young(passenger) and is_rich_and_bold(passenger)):
             predictions[passenger_id] = 1
         else:
             predictions[passenger_id] = 0
