@@ -58,18 +58,21 @@ def simple_heuristic(file_path):
 
     predictions = {}
     df = pandas.read_csv(file_path)
+
     for passenger_index, passenger in df.iterrows():
         passenger_id = passenger['PassengerId']
 
         # Your code here:
         # For example, let's assume that if the passenger
         # is a male, then the passenger survived.
-        #     if passenger['Sex'] == 'male':
-        #         predictions[passenger_id] = 1
+        if passenger['Sex'] == 'male':
+            predictions[passenger_id] = 1
+        else:
+            predictions[passenger_id] = 0
 
-    print(df)
     return predictions
 
 if __name__ == '__main__':
     path = "c:\\Users\\lukasz\\Documents\\udacity\\titanic_data.csv"
-    simple_heuristic(path)
+    predictions = simple_heuristic(path)
+    print(predictions)
