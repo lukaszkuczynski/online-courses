@@ -62,10 +62,10 @@ def simple_heuristic(file_path):
     for passenger_index, passenger in df.iterrows():
         passenger_id = passenger['PassengerId']
 
-        # Your code here:
-        # For example, let's assume that if the passenger
-        # is a male, then the passenger survived.
-        if passenger['Sex'] == 'female':
+        def is_woman(passenger):
+            return passenger['Sex'] == 'female'
+
+        if is_woman(passenger):
             predictions[passenger_id] = 1
         else:
             predictions[passenger_id] = 0
