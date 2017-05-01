@@ -67,4 +67,9 @@ def simple_heuristic(file_path):
         #     if passenger['Sex'] == 'male':
         #         predictions[passenger_id] = 1
 
+    print(df)
     return predictions
+
+if __name__ == '__main__':
+    path = "c:\\Users\\lukasz\\Documents\\udacity\\titanic_data.csv"
+    simple_heuristic(path)
