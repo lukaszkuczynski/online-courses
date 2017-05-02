@@ -58,6 +58,7 @@ def simple_heuristic(file_path):
 
     predictions = {}
     df = pandas.read_csv(file_path)
+    predicted = []
 
     for passenger_index, passenger in df.iterrows():
         passenger_id = passenger['PassengerId']
@@ -68,18 +69,37 @@ def simple_heuristic(file_path):
             return passenger['Age'] < 18
         def is_rich_and_bold(passenger):
             return passenger['Pclass'] == 1
+        # def custom(passenger):
+            # return passenger['SibSp'] > 0
+            # return (passenger['Age'] in range(25,35)) and (passenger['Parch'] > 0 or passenger['SibSp'] == 0)
 
         if is_woman(passenger) or (is_young(passenger) and is_rich_and_bold(passenger)):
             predictions[passenger_id] = 1
+            predicted.append(1)
         else:
             predictions[passenger_id] = 0
+            predicted.append(0)
 
-    return predictions
+    df['predicted'] = predicted
+
+
+    return predictions, df
 
 if __name__ == '__main__':
     path = "c:\\Users\\lukasz\\Documents\\udacity\\titanic_data.csv"
-    predictions = simple_heuristic(path)
+    (predictions, df) = simple_heuristic(path)
+    df['valid'] = df['predicted'] == df['Survived']
+    prediction_failed_df = df[df['valid'] == False]
+    # print(prediction_failed_df.head())
+    prediction_failed_df.to_csv('prediction_failed.csv')
+    prediction_succeeded_df = df[df['valid'] == True]
+    succeeded = len(prediction_succeeded_df.index)
+    total = len(df.index)
+    print(f'Total {total}'
+          f', succeded for {succeeded}'
+          f', failed for {len(prediction_failed_df.index)}')
+    print(f'Succeded for percent {succeeded/total}')
+    # print(predictions)
+    # survived = list(n for n in predictions.items() if n[1] == 1)
+    # print(f'Survived {len(survived)} from total {len(predictions)}')
 
-    print(predictions)
-    survived = list(n for n in predictions.items() if n[1] == 1)
-    print(f'Survived {len(survived)} from total {len(predictions)}')
