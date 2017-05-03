@@ -3,7 +3,7 @@ import pandas
 import statsmodels.api as sm
 
 
-def simple_heuristic(file_path):
+def simple_heuristic(file_path, param):
     '''
     In this exercise, we will perform some rudimentary practices similar to those of
     an actual data scientist.
@@ -68,12 +68,29 @@ def simple_heuristic(file_path):
         def is_young(passenger):
             return passenger['Age'] < 18
         def is_rich_and_bold(passenger):
-            return passenger['Pclass'] == 1
-        # def custom(passenger):
+            return passenger['Pclass'] < 3
+        def custom(passenger, param):
+            val = 0
             # return passenger['SibSp'] > 0
-            # return (passenger['Age'] in range(25,35)) and (passenger['Parch'] > 0 or passenger['SibSp'] == 0)
+            ##single fathers
+            # return (passenger['Sex'] == 'male') and (passenger['Parch'] == 1 and passenger['SibSp'] > 0)
+            ## all kids
+            # return (passenger['Age'] in range(0,16))
+            ## no-kid husbands
+            # return (passenger['Sex'] == 'male') and (passenger['Parch'] == 0 and passenger['SibSp'] == 1)
+            ## kid with siblings
+            # val = passenger['Age'] < 7
+            ## alone singe young man
+            # val2 = passenger['Age'] < 30 and (passenger['Parch'] == 0 and passenger['SibSp'] > 0)
+            # val = val or val2
+            # expensive tickets
+            val = passenger['Fare'] > param
+            ## young father
+            ## only having wife/sibling, no kids
+            # val = passenger['SibSp'] == 1 and passenger['Parch'] == 0
+            return val
 
-        if is_woman(passenger) or (is_young(passenger) and is_rich_and_bold(passenger)):
+        if is_woman(passenger) or (is_young(passenger) and is_rich_and_bold(passenger)) or custom(passenger, param):
             predictions[passenger_id] = 1
             predicted.append(1)
         else:
@@ -87,18 +104,21 @@ def simple_heuristic(file_path):
 
 if __name__ == '__main__':
     path = "c:\\Users\\lukasz\\Documents\\udacity\\titanic_data.csv"
-    (predictions, df) = simple_heuristic(path)
-    df['valid'] = df['predicted'] == df['Survived']
-    prediction_failed_df = df[df['valid'] == False]
-    # print(prediction_failed_df.head())
-    prediction_failed_df.to_csv('prediction_failed.csv')
-    prediction_succeeded_df = df[df['valid'] == True]
-    succeeded = len(prediction_succeeded_df.index)
-    total = len(df.index)
-    print(f'Total {total}'
-          f', succeded for {succeeded}'
-          f', failed for {len(prediction_failed_df.index)}')
-    print(f'Succeded for percent {succeeded/total}')
+
+    for i in range(10, 300, 10):
+        print(f'i={i}')
+        (predictions, df) = simple_heuristic(path, i)
+        df['valid'] = df['predicted'] == df['Survived']
+        prediction_failed_df = df[df['valid'] == False]
+        # print(prediction_failed_df.head())
+        prediction_failed_df.to_csv('prediction_failed.csv')
+        prediction_succeeded_df = df[df['valid'] == True]
+        succeeded = len(prediction_succeeded_df.index)
+        total = len(df.index)
+        # print(f'Total {total}'
+        #       f', succeded for {succeeded}'
+        #       f', failed for {len(prediction_failed_df.index)}')
+        print(f'Succeded for percent {succeeded/total}')
     # print(predictions)
     # survived = list(n for n in predictions.items() if n[1] == 1)
     # print(f'Survived {len(survived)} from total {len(predictions)}')
