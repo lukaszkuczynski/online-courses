@@ -11,8 +11,8 @@ def api_get_request(url):
     #
     # Once you've done this, return the name of the number 1 top artist in
     # Spain.
-    body = requests.get(url_to_get)
-    response = json.loads(body.content)
+    body = requests.get(url)
+    response = json.loads(body.text)
     top = response['topartists']['artist'][0]['name']
     return top
 
