@@ -37,8 +37,18 @@ def aggregate_query(filename):
     # into this exercise below:
     # https://s3.amazonaws.com/content.udacity-data.com/courses/ud359/aadhaar_data.csv
 
-    q =  # your code here
+    q =  """
+    SELECT gender, district, SUM(aadhaar_generated)
+    FROM aadhaar_data
+    WHERE age > 50
+    GROUP BY gender, district
+    """
 
     # Execute your SQL command against the pandas frame
     aadhaar_solution = pandasql.sqldf(q.lower(), locals())
     return aadhaar_solution
+
+
+if __name__ == '__main__':
+    solution = aggregate_query('aadhaar_data.csv')
+    print(solution)
