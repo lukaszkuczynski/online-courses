@@ -1,3 +1,4 @@
+import os
 import json
 import requests
 
@@ -10,5 +11,15 @@ def api_get_request(url):
     #
     # Once you've done this, return the name of the number 1 top artist in
     # Spain.
+    body = requests.get(url_to_get)
+    response = json.loads(body.content)
+    top = response['topartists']['artist'][0]['name']
+    return top
 
-    return ...  # return the top artist in Spain
+
+if __name__ == '__main__':
+    api_key = os.environ["LASTFM_API_KEY"]
+    url_to_get = f"http://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country=spain&api_key={api_key}&format=json"
+    top = api_get_request(url_to_get)
+    print(top)
+
