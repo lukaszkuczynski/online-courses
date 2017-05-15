@@ -17,6 +17,11 @@ def imputation(filename):
 
     baseball = pandas.read_csv(filename)
 
-    # YOUR CODE GOES HERE
+    baseball['weight'] = baseball['weight'].fillna(numpy.mean(baseball['weight']))
 
     return baseball
+
+
+if __name__ == '__main__':
+    imputed = imputation("Master.csv")
+    print(imputed)
