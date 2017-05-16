@@ -22,9 +22,17 @@ def avg_min_temperature(filename):
     weather_data = pandas.read_csv(filename)
 
     q = """
-    your query here
+    SELECT AVG(mintempi) 
+    FROM weather_data
+    WHERE rain = 1
+    AND mintempi > 55
     """
 
     # Execute your SQL command against the pandas frame
     avg_min_temp_rainy = pandasql.sqldf(q.lower(), locals())
     return avg_min_temp_rainy
+
+
+if __name__ == '__main__':
+    solution = avg_min_temperature("weather_underground.csv")
+    print(solution)
