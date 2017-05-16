@@ -1,6 +1,5 @@
 import csv
 
-
 def fix_turnstile_data(filenames):
     '''
     Filenames is a list of MTA Subway turnstile text files. A link to an example
@@ -34,5 +33,22 @@ def fix_turnstile_data(filenames):
     Sample updated file: solution_turnstile_110528.txt
     '''
     for name in filenames:
+        with open(name, 'r') as fin:
+            updated_name = 'updated_'+name
+            with open(updated_name, 'w') as fout:
+                writer = csv.writer(fout)
+                reader = csv.reader(fin)
+                for line in reader:
+                    headings = line[0:3]
+                    item_count_in_line = int((len(line) - 3) / 5)
+                    for n in range(1,item_count_in_line+1):
+                        entry = []
+                        entry.extend(headings)
+                        items_for_single_entry = line[3+(n-1)*5:3+(n*5)]
+                        entry.extend(items_for_single_entry)
+                        writer.writerow(entry)
 
-# your code here
+
+if __name__ == '__main__':
+    filenames = ["turnstile_110507.txt"]
+    fix_turnstile_data(filenames)
