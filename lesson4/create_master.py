@@ -26,4 +26,10 @@ def create_master_turnstile_file(filenames, output_file):
     with open(output_file, 'w') as master_file:
         master_file.write('C/A,UNIT,SCP,DATEn,TIMEn,DESCn,ENTRIESn,EXITSn\n')
         for filename in filenames:
-    # your code here
+            print(filename)
+
+
+if __name__ == '__main__':
+    out = "master.csv"
+    files = ["turnstile1.txt", "turnstile2.txt"]
+    create_master_turnstile_file(files, out)

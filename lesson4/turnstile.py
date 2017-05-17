@@ -35,7 +35,7 @@ def fix_turnstile_data(filenames):
     for name in filenames:
         with open(name, 'r') as fin:
             updated_name = 'updated_'+name
-            with open(updated_name, 'w') as fout:
+            with open(updated_name, 'w', newline="") as fout:
                 writer = csv.writer(fout)
                 reader = csv.reader(fin)
                 for line in reader:
