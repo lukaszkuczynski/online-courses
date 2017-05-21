@@ -1,4 +1,4 @@
-import pandas
+import pandas as pd
 
 
 def filter_by_regular(filename):
@@ -19,8 +19,12 @@ def filter_by_regular(filename):
     2,A002,R051,02-00-00,05-01-11,08:00:00,REGULAR,3144353,1088177
     '''
 
-    turnstile_data =  # your code here
-    # more of your code here
+    turnstile_data = pd.read_csv(filename)
+    turnstile_data = turnstile_data[turnstile_data["DESCn"] == "REGULAR"]
     return turnstile_data
 
 
+if __name__ == '__main__':
+    filename = "turnstile_110507_headers.txt"
+    filtered = filter_by_regular(filename)
+    print(filtered)
