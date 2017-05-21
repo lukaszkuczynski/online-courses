@@ -1,4 +1,4 @@
-import pandas
+import pandas as pd
 
 
 def get_hourly_exits(df):
@@ -32,5 +32,12 @@ def get_hourly_exits(df):
     9              9  A002  R051  02-00-00  05-02-11  12:00:00  REGULAR   3145094   1088753              153            333
     '''
 
-    # your code here
+    df['EXITSn_hourly'] = df['EXITSn'] - df['EXITSn'].shift(1)
+    df.fillna(0, inplace=True)
     return df
+
+
+if __name__ == '__main__':
+    df = pd.read_csv("turnstile_110507_headers.txt")
+    df = get_hourly_exits(df)
+    print(df)
