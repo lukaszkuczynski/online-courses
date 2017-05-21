@@ -15,5 +15,14 @@ def time_to_hour(time):
     Please return hour as an integer.
     '''
 
-    hour =  # your code here
+    hour = int(time[:2])
     return hour
+
+
+if __name__ == '__main__':
+    hour = time_to_hour("00:00:00")
+    assert hour == 0
+    hour = time_to_hour("01:00:00")
+    assert hour == 1
+    hour = time_to_hour("21:00:00")
+    assert hour == 21
