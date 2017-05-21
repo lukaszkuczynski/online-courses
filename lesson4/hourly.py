@@ -1,4 +1,4 @@
-import pandas
+import pandas as pd
 
 
 def get_hourly_entries(df):
@@ -36,4 +36,14 @@ def get_hourly_entries(df):
 
     '''
     # your code here
+    df['shifted'] = df['ENTRIESn'].shift(1)
+    df['ENTRIESn_hourly'] = df['ENTRIESn'] - df['shifted']
+    df.fillna(1, inplace=True)
+    del df['shifted']
     return df
+
+
+if __name__ == '__main__':
+    df = pd.read_csv("turnstile_110507_headers.txt")
+    df = get_hourly_entries(df)
+    print(df)
