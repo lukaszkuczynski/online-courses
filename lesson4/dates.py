@@ -17,12 +17,12 @@ def reformat_subway_dates(date):
     http://docs.python.org/2/library/datetime.html#datetime.datetime.strptime
     '''
 
-    date_formatted = "" # your code here
-    return date_formatted
+    date_formatted = datetime.datetime.strptime(date, "%m-%d-%y")
+    return date_formatted.strftime("%Y-%m-%d")
 
 
 if __name__ == '__main__':
-    date_before = "12-31-1999"
-    date_expected = "31-12-1999"
+    date_before = "12-31-16"
+    date_expected = "2016-12-31"
     date_actual = reformat_subway_dates(date_before)
     assert date_expected == date_actual
