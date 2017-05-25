@@ -36,7 +36,8 @@ def compare_averages(filename):
     df_left = df[df['handedness'] == 'L']
     df_right = df[df['handedness'] == 'R']
     t, p = scipy.stats.ttest_ind(df_left['avg'], df_right['avg'], equal_var=False)
-    return (False, (t,p))
+    indifferent = p > 0.05
+    return (indifferent, (t,p))
 
 
 if __name__ == '__main__':
