@@ -39,5 +39,6 @@ def mann_whitney_plus_means(turnstile_weather):
 
 if __name__ == '__main__':
     df = pd.read_csv("turnstile_data_master_with_weather.csv")
-    mann_whitney_plus_means(df)
+    results = mann_whitney_plus_means(df)
+    print(results)
 
