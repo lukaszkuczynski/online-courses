@@ -12,9 +12,9 @@ def compute_r_squared(data, predictions):
     mean = np.mean(data)
     up = 0
     down = 0
-    # up = up + np.square(np.sum([data, predictions]))
+    up = up + np.square(np.sum([data, predictions]))
     for i in range(len(data)):
-        up = up + pow(data[i] - predictions[i], 2)
+        # up = up + pow(data[i] - predictions[i], 2)
         down = down + pow(data[i] - mean, 2)
     r_squared = 1 - (up / down)
     return r_squared
