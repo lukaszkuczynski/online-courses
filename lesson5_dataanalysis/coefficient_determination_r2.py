@@ -11,3 +11,10 @@ def compute_r_squared(data, predictions):
     # YOUR CODE GOES HERE
 
     return r_squared
+
+
+if __name__ == '__main__':
+    data = [1, 2]
+    predictions = [1.1, 1.9]
+    coefficient = compute_r_squared(data, predictions)
+    print(coefficient)
