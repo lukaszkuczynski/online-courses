@@ -30,10 +30,11 @@ def mann_whitney_plus_means(turnstile_weather):
     '''
 
     ### YOUR CODE HERE ###
-
-    with_rain_mean = np.mean(turnstile_weather[turnstile_weather['rain'] == 1]['ENTRIESn_hourly'])
-    without_rain_mean = np.mean(turnstile_weather[turnstile_weather['rain'] == 0]['ENTRIESn_hourly'])
-    print(with_rain_mean, without_rain_mean)
+    with_rain = turnstile_weather[turnstile_weather['rain'] == 1]['ENTRIESn_hourly']
+    with_rain_mean = np.mean(with_rain)
+    without_rain = turnstile_weather[turnstile_weather['rain'] == 0]['ENTRIESn_hourly']
+    without_rain_mean = np.mean(without_rain)
+    U, p = scipy.stats.mannwhitneyu(with_rain, without_rain)
     return with_rain_mean, without_rain_mean, U, p  # leave this line for the grader
 
 if __name__ == '__main__':
