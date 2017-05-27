@@ -9,12 +9,19 @@ def compute_r_squared(data, predictions):
     # that you might find useful, but you don't have to use them.
 
     # YOUR CODE GOES HERE
-
+    mean = np.mean(data)
+    up = 0
+    down = 0
+    # up = up + np.square(np.sum([data, predictions]))
+    for i in range(len(data)):
+        up = up + pow(data[i] - predictions[i], 2)
+        down = down + pow(data[i] - mean, 2)
+    r_squared = 1 - (up / down)
     return r_squared
 
 
 if __name__ == '__main__':
-    data = [1, 2]
-    predictions = [1.1, 1.9]
+    data = np.array([1, 2])
+    predictions = np.array([1.1, 1.9])
     coefficient = compute_r_squared(data, predictions)
     print(coefficient)
