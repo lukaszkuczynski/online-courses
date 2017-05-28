@@ -112,7 +112,7 @@ def predictions(dataframe):
     values_array = np.array(values)
 
     # Set values for alpha, number of iterations.
-    alpha = 0.1  # please feel free to change this value
+    alpha = 0.3  # please feel free to change this value
     num_iterations = 75  # please feel free to change this value
 
     # Initialize theta, perform gradient descent
@@ -127,7 +127,7 @@ def predictions(dataframe):
     # -------------------------------------------------
     # Uncomment the next line to see your cost history
     # -------------------------------------------------
-    # plot = plot_cost_history(alpha, cost_history)
+    plot = plot_cost_history(alpha, cost_history)
     #
     # Please note, there is a possibility that plotting
     # this in addition to your calculation will exceed
@@ -156,3 +156,7 @@ def plot_cost_history(alpha, cost_history):
            geom_point() + ggtitle('Cost History for alpha = %.3f' % alpha)
 
 
+if __name__ == '__main__':
+    df = pandas.read_csv("turnstile_data_master_with_weather.csv")
+    preds, plot = predictions(df)
+    plot.show()
