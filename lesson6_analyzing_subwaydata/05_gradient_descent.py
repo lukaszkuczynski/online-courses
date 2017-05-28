@@ -35,7 +35,9 @@ def compute_cost(features, values, theta):
     but feel free to implement your own.
     """
 
-    # your code here
+    m = len(values)
+    sum_of_square_errors = np.square(np.dot(features, theta) - values).sum()
+    cost = sum_of_square_errors / (2*m)
 
     return cost
 
